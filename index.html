@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>BlueWave Studio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;font-family:Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;color:#eaf6ff;background:var(--bg, #020617)}
+
+    :root{
+      --bg-1:#020617;
+      --bg-2:#07102a;
+      --accent-1:#60a5fa;
+      --accent-2:#a78bfa;
+      --accent-3:#7dd3fc;
+    }
+
+    .page{
+      min-height:100vh;
+      width:100%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(34,211,238,0.06), transparent 10%),
+                  radial-gradient(900px 500px at 90% 90%, rgba(167,139,250,0.06), transparent 10%),
+                  linear-gradient(180deg,var(--bg-1),var(--bg-2));
+      position:relative;
+      overflow:hidden;
+    }
+
+    .blob{position:absolute;border-radius:40%;filter:blur(140px);opacity:0.36;transform:translateZ(0);}
+    .blob.left{width:720px;height:720px;left:-240px;top:-120px;background:linear-gradient(135deg,var(--accent-1),var(--accent-2));animation:blobMove 12s ease-in-out infinite}
+    .blob.right{width:620px;height:620px;right:-200px;bottom:-160px;background:linear-gradient(135deg,var(--accent-2),var(--accent-3));animation:blobMove 14s ease-in-out infinite reverse}
+    @keyframes blobMove{0%{transform:translateY(0) scale(1)}50%{transform:translateY(48px) scale(1.03)}100%{transform:translateY(0) scale(1)}}
+
+    .gridOverlay{position:absolute;inset:0;opacity:0.04;background-image:linear-gradient(transparent 23px, rgba(255,255,255,0.02) 24px), linear-gradient(90deg, transparent 23px, rgba(255,255,255,0.02) 24px);background-size:24px 24px;pointer-events:none}
+
+    .container{position:relative;z-index:10;width:100%;max-width:1140px;padding:48px;display:flex;flex-direction:column;align-items:center;text-align:center}
+
+    .brand{display:flex;flex-direction:column;align-items:center;gap:16px}
+    .brand img{width:100px;height:100px;object-fit:cover;border-radius:50%;filter:drop-shadow(0 0 12px rgba(96,165,250,0.4))}
+
+    .studioName{font-family:Orbitron, sans-serif;font-size:44px;line-height:1;background:linear-gradient(90deg,var(--accent-1),var(--accent-2),var(--accent-3));-webkit-background-clip:text;background-clip:text;color:transparent}
+    .tag{margin-top:6px;color:rgba(220,235,255,0.75);letter-spacing:1.6px;text-transform:uppercase;font-size:12px}
+
+    .lead{margin-top:18px;color:rgba(230,245,255,0.92);font-size:18px;max-width:780px}
+
+    .small{margin-top:40px;color:rgba(147,197,253,0.6);font-size:12px}
+
+    .wave{position:absolute;left:0;right:0;bottom:-1px;z-index:9;opacity:0.8}
+
+    @media (max-width:720px){
+      .studioName{font-size:28px}
+      .brand img{width:80px;height:80px}
+      .container{padding:28px}
+      .lead{font-size:16px}
+    }
+  </style>
+</head>
+<body>
+  <main class="page" aria-labelledby="title">
+    <div class="blob left" aria-hidden="true"></div>
+    <div class="blob right" aria-hidden="true"></div>
+    <div class="gridOverlay" aria-hidden="true"></div>
+
+    <div class="container">
+      <div class="brand">
+        <img src="https://i.imgur.com/kp6TmbV.png" alt="BlueWave Studio Logo" />
+        <div id="title" class="studioName">BlueWave Studio</div>
+        <div class="tag">Main Company</div>
+      </div>
+
+      <p class="lead">BlueWave Studio is a hub for innovation and creativity, powering multiple brands and ventures with futuristic design and technology.</p>
+
+      <div class="small">© <span id="year"></span> BlueWave Studio — All rights reserved.</div>
+    </div>
+
+    <svg class="wave" viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <linearGradient id="g1" x1="0%" x2="100%">
+          <stop offset="0%" stop-color="#60a5fa" stop-opacity="0.12"></stop>
+          <stop offset="100%" stop-color="#a78bfa" stop-opacity="0.08"></stop>
+        </linearGradient>
+      </defs>
+      <path d="M0 40 C 240 0, 360 80, 720 40 C 1080 0, 1200 80, 1440 40 L1440 160 L0 160 Z" fill="url(#g1)"></path>
+    </svg>
+  </main>
+
+  <script>
+    // inject the current year into the footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
